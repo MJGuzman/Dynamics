@@ -5,7 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Dynamics.Instalador"
         mc:Ignorable="d"
-        Title="MainWindow" Height="402" Width="600">
+        WindowStartupLocation="CenterScreen"
+        MaxHeight="402"
+        MinHeight="402"
+        MaxWidth="600"
+        MinWidth="600"
+        ResizeMode="NoResize"
+        Closing="Window_Closing"
+        Title="Sincronizador Installer" Height="402" Width="600">
     <Grid>
         <!--Primera vista-->
         <Grid HorizontalAlignment="Left" Height="327" VerticalAlignment="Top" Width="592" Background="FloralWhite" x:Name="Grid1">

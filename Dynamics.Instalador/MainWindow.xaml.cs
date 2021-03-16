@@ -23,8 +23,8 @@ namespace Dynamics.Instalador
         private string initialRoute = string.Empty;
         private WebClient webClient;
         private WebClient dynamicClient;
-        private string URL_OLEB = "https://download.microsoft.com/download/b/f/b/bfbfa4b8-7f91-4649-8dab-9a6476360365/VFPOLEDBSetup.msi";
-        private string URL_DYNAMICS = "http://localhost:3000/sdapp-v1.0.0.1.zip";
+        private string URL_OLEB = ConfigurationManager.AppSettings["OLEB_URL"].ToString();
+        private string URL_DYNAMICS = ConfigurationManager.AppSettings["DYNAMIC_URL"].ToString();
         private string TEMP_OLEB = string.Empty;
         private string TEMP_DYNAMICS = string.Empty;
         private string DYNAMICS_ROUTE = string.Empty;
@@ -144,14 +144,12 @@ namespace Dynamics.Instalador
             try
             {
                 rtmessages.AppendText("Verificando ultima actualización");
-                return new WebClient().DownloadString("http://localhost:3000/version.txt").Replace("\n", "");                
+                return new WebClient().DownloadString($"{URL_DYNAMICS}/version.txt").Replace("\n", "");                
             }
             catch (Exception ex)
             {
                 throw new Exception();
-            }
-
-            
+            }            
         }
 
         private void DownloadDynamics()
@@ -169,9 +167,8 @@ namespace Dynamics.Instalador
             Directory.CreateDirectory(TEMP_DYNAMICS);
 
             TEMP_DYNAMICS = Path.Combine(TEMP_DYNAMICS, LAST_VERSION);
-            _ = Path.Combine(URL_DYNAMICS, $"/{LAST_VERSION}");
 
-            dynamicClient.DownloadFileAsync(new Uri(URL_DYNAMICS), TEMP_DYNAMICS);
+            dynamicClient.DownloadFileAsync(new Uri($"{URL_DYNAMICS}/{LAST_VERSION}"), TEMP_DYNAMICS);
             rtmessages.AppendText("\nDescargando Sincronizador de Dynamics");
         }
 
@@ -391,6 +388,28 @@ namespace Dynamics.Instalador
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
             BackPage();
+        }
+               
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (MessageBox.Show("Seguro que quieres salir?", "Instalación", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                if(webClient != null)
+                {
+                    if (webClient.IsBusy)
+                        webClient.CancelAsync();
+                }
+
+                if(dynamicClient != null)
+                {
+                    if (dynamicClient.IsBusy)
+                        dynamicClient.CancelAsync();
+                }
+
+                Environment.Exit(0);
+            }
+            e.Cancel = true;
         }
     }
 }
