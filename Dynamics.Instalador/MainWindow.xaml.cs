@@ -91,8 +91,10 @@ namespace Dynamics.Instalador
             TEMP_OLEB = Path.Combine(Path.GetTempPath(), "Oleb_Installer");
 
             if (Directory.Exists(TEMP_OLEB)) DeleteFolder(TEMP_OLEB);
-            Directory.CreateDirectory(TEMP_OLEB);           
-                        
+            Directory.CreateDirectory(TEMP_OLEB);
+
+            TEMP_OLEB = Path.Combine(TEMP_OLEB, "VFPOLEDBSetup.msi");
+
             webClient.DownloadFileAsync(new Uri(URL_OLEB), TEMP_OLEB);
         }
 
@@ -117,11 +119,14 @@ namespace Dynamics.Instalador
                         if (Directory.Exists(DYNAMICS_ROUTE))
                             DeleteFolder(DYNAMICS_ROUTE);
 
-                        //Directory.CreateDirectory(DYNAMICS_ROUTE);
+                        Directory.CreateDirectory(DYNAMICS_ROUTE);
 
-                        Directory.Move(TEMP_OLEB, DYNAMICS_ROUTE);
+                        var destFile = Path.Combine(DYNAMICS_ROUTE, "VFPOLEDBSetup.msi");
+
+                        File.Copy(TEMP_OLEB, destFile);
 
                         pboleb.Value = pboleb.Maximum;
+                        
                     }
                 };
 
