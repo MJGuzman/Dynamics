@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Dynamics.Instalador"
         mc:Ignorable="d"
-        Title="MainWindow" Height="400" Width="600">
+        Title="MainWindow" Height="402" Width="600">
     <Grid>
         <!--Primera vista-->
         <Grid HorizontalAlignment="Left" Height="327" VerticalAlignment="Top" Width="592" Background="FloralWhite" x:Name="Grid1">
@@ -27,7 +27,6 @@
             <Button Click="Button_Click" Content="Examinar" HorizontalAlignment="Left" Margin="491,242,0,0" VerticalAlignment="Top" Width="75"/>
 
 
-
         </Grid>
         <!--Tercera vista-->
         <Grid Visibility="Hidden" HorizontalAlignment="Left" Height="327" VerticalAlignment="Top" Width="592" Background="FloralWhite" x:Name="Grid3">
@@ -37,8 +36,44 @@
 
         </Grid>
 
+        <!--Cuarta vista-->
+        <Grid Visibility="Hidden" HorizontalAlignment="Left" Height="327" VerticalAlignment="Top" Width="592" Background="FloralWhite" x:Name="Grid4">
+            <Image Source="pack://application:,,,/Assets/Instalador.png" HorizontalAlignment="Left" Height="327" VerticalAlignment="Top" Width="231"/>
+            <TextBlock Margin="250,66,53,207" FontSize="16" FontWeight="Bold" Text="Instalado Sincronizador Dynamics" TextWrapping="WrapWithOverflow"/>
+            <ProgressBar HorizontalAlignment="Left" Height="10" Margin="250,249,0,0" VerticalAlignment="Top" Width="289" Minimum="0" Maximum="100" IsIndeterminate="True" x:Name="pbInstaller"/>
+            <RichTextBox  IsReadOnly="True" TabIndex="2" HorizontalAlignment="Left" Height="119" Margin="250,116,0,0" VerticalAlignment="Top" Width="289" x:Name="rtmessages"/>
+
+        </Grid>
+
+        <!--Quinta vista-->
+        <Grid Visibility="Hidden" HorizontalAlignment="Left" Height="327" VerticalAlignment="Top" Width="592" Background="FloralWhite" x:Name="Grid5">
+            <Image Source="pack://application:,,,/Assets/Instalador.png" HorizontalAlignment="Left" Height="327" VerticalAlignment="Top" Width="231"/>
+            <TextBlock Margin="251,68,90,226" FontSize="11" FontWeight="Bold" Text="Configuracion del sincronizador de dynamics" TextWrapping="WrapWithOverflow"/>
+
+            <TextBlock Margin="251,137,163,169" FontSize="11" Text="Direccion base de datos:" TextWrapping="WrapWithOverflow"/>
+            <TextBox TextChanged="tbbranch_TextChanged" HorizontalAlignment="Left" Height="22" Margin="251,160,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="223" x:Name="tbrouteDB"/>
+            <Button Click="btnroutedb_Click" Content="Examinar" HorizontalAlignment="Left" Margin="491,162,0,0" VerticalAlignment="Top" Width="75" x:Name="btnroutedb"/>
+            <TextBlock Margin="251,211,163,95" FontSize="11" Text="Codigo sucursal:" TextWrapping="WrapWithOverflow"/>
+            <TextBox TextChanged="tbbranch_TextChanged" HorizontalAlignment="Left" Height="22" Margin="251,231,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="98" x:Name="tbbranch"/>
+            <ProgressBar Visibility="Hidden" HorizontalAlignment="Left" Height="10" Margin="250,283,0,0" VerticalAlignment="Top" Width="316" Minimum="0" Maximum="100" IsIndeterminate="True" x:Name="pbconfig"/>
+
+            <Button Click="btnsaveconfig_Click" Content="Guardar" HorizontalAlignment="Left" Margin="491,233,0,0" VerticalAlignment="Top" Width="75" x:Name="btnsaveconfig"/>
+
+        </Grid>
+
+        <!--Cuarta vista-->
+        <Grid Visibility="Hidden" HorizontalAlignment="Left" Height="327" VerticalAlignment="Top" Width="592" Background="FloralWhite" x:Name="Grid6">
+            <Image Source="pack://application:,,,/Assets/Instalador.png" HorizontalAlignment="Left" Height="327" VerticalAlignment="Top" Width="231"/>
+            <TextBlock Margin="250,118,53,182" FontSize="12" Text="Sincronizador dynamics instalado y configurado." TextWrapping="WrapWithOverflow"/>
+            <TextBlock Margin="249,150,54,112" FontSize="11" FontWeight="Bold" Text="Tomar en cuenta: En caso de subir dias en especifico tienes que entrar a la carpeta de integración y hacer la configuración ya suministrada." TextWrapping="WrapWithOverflow"/>
+
+
+        </Grid>
+
+
+
         <Grid HorizontalAlignment="Left" Height="42" Margin="0,327,0,0" VerticalAlignment="Top" Width="592" Background="LightGray">
-            <Button Content="Atrás" HorizontalAlignment="Left" Margin="355,7,0,0" VerticalAlignment="Top" Width="85" Height="25" x:Name="btnBack"/>
+            <Button Click="btnBack_Click" Content="Atrás" HorizontalAlignment="Left" Margin="355,7,0,0" VerticalAlignment="Top" Width="85" Height="25" x:Name="btnBack"/>
             <Button Click="btnNext_Click" Content="Siguiente" HorizontalAlignment="Left" Margin="475,7,0,0" VerticalAlignment="Top" Width="85" Height="25" x:Name="btnNext"/>
         </Grid>
 
